@@ -12,7 +12,7 @@
     {
       $query = "SELECT * FROM users WHERE email = ?";
       $user = $this->db->query($query, $user_data['email'])->row_array();
-      
+
       if (password_verify($user_data['password'], $user['password']))
       {
         return $user;
@@ -21,6 +21,15 @@
       {
         return null;
       }
+
+    }
+    function show($id)
+    {
+      // get user from db
+      $query = "SELECT * FROM users WHERE id = ?";
+      $user = $this->db->query($query, $id)->row_array();
+      // returns that user as a row
+      return $user;
 
     }
   }

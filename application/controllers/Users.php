@@ -7,6 +7,7 @@ class Users extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('User');
+    $this->load->model('Wall');
   }
 
   public function index()
@@ -18,7 +19,7 @@ class Users extends CI_Controller {
   {
     // $this->output->enable_profiler(TRUE);
     $user_input = $this->input->post(NULL, TRUE);
-    
+
     if ($user_input)
     {
       $user_data = array(
@@ -40,16 +41,27 @@ class Users extends CI_Controller {
   {
     $user_input = $this->input->post(NULL, TRUE);
     $user = $this->User->login($user_input);
-    
+
     if ($user)
     {
-      redirect('/dashboards');
+      redirect('/users/show/'.$user['id']);
     }
     else
     {
       redirect('/');
     }
 
+  }
+
+  public function show($id){
+    $user = $this->User->show($id);
+    $wall = $this->Wall->show($id);
+    if ($wall == NULL){
+      $this->Wall->create($id);
+    }
+    $wall = $this->Wall->show($id);
+    $wall = $this->Wall->show($id);
+    $this->load->view('Users/show', array("user" => $user, "wall" => $wall));
   }
 
 }
