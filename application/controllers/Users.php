@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends CI_Controller {
 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->model('User');
+  }
+
   public function index()
   {
     $this->load->view('index');
@@ -11,7 +17,6 @@ class Users extends CI_Controller {
   public function register()
   {
     // $this->output->enable_profiler(TRUE);
-    $this->load->model('User');
     $user_input = $this->input->post(NULL, TRUE);
     
     if ($user_input)
@@ -23,12 +28,28 @@ class Users extends CI_Controller {
         password_hash($user_input['password'], PASSWORD_DEFAULT)
       );
       $this->User->register($user_data);
-      redirect('/');
+      redirect('/dashboards');
     }
     else
     {
       $this->load->view('Users/register');
     }
+  }
+
+  public function login()
+  {
+    $user_input = $this->input->post(NULL, TRUE);
+    $user = $this->User->login($user_input);
+    
+    if ($user)
+    {
+      redirect('/dashboards');
+    }
+    else
+    {
+      redirect('/');
+    }
+
   }
 
 }

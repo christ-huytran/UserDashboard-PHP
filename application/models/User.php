@@ -7,6 +7,22 @@
       $query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (?,?,?,?,NOW(),NOW())";
       return $this->db->query($query, $user_data);
     }
+
+    function login($user_data)
+    {
+      $query = "SELECT * FROM users WHERE email = ?";
+      $user = $this->db->query($query, $user_data['email'])->row_array();
+      
+      if (password_verify($user_data['password'], $user['password']))
+      {
+        return $user;
+      }
+      else
+      {
+        return null;
+      }
+
+    }
   }
 
 ?>

@@ -23,12 +23,12 @@
         <a class="navbar-brand" href="#">User Dashboard</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right" action="login" method="post">
           <div class="form-group">
-            <input type="text" placeholder="Email" class="form-control">
+            <input type="email" placeholder="Email" class="form-control" name="email">
           </div>
           <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control">
+            <input type="password" placeholder="Password" class="form-control" name="password">
           </div>
           <button type="submit" class="btn btn-success">Sign in</button>
         </form>
@@ -41,7 +41,7 @@
     <div class="container">
       <h1>Welcome!</h1>
       <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register &raquo;</a></p>
     </div>
   </div>
 
