@@ -18,13 +18,13 @@ class Dashboards extends CI_Controller {
   public function create_messages()
   {
     $this->Message->create($this->input->post());
-    redirect('/users/show/1');
+    redirect('/users/show/'.$this->input->post('user_id'));
   }
 
   public function create_comments()
   {
     $this->Comment->create($this->input->post());
-    redirect('/users/show/1');
+    redirect('/users/show/'.$this->input->post('user_id'));
   }
 
 }

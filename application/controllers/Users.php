@@ -9,6 +9,7 @@ class Users extends CI_Controller {
     $this->load->model('User');
     $this->load->model('Wall');
     $this->load->model('Message');
+    $this->load->model('Comment');
   }
 
   public function index()
@@ -30,7 +31,7 @@ class Users extends CI_Controller {
         password_hash($user_input['password'], PASSWORD_DEFAULT)
       );
       $this->User->register($user_data);
-      redirect('/dashboards');
+      redirect('/');
     }
     else
     {
@@ -61,8 +62,23 @@ class Users extends CI_Controller {
       $this->Wall->create($id);
     }
     $wall = $this->Wall->show($id);
+
     $messages = $this->Message->index_wall_messages($wall['id']);
-    $this->load->view('Users/show', array("user" => $user, "wall" => $wall, "messages" => $messages));
+    $comments = [];
+    // message 1
+      //a comment 1
+      //b comment 2
+      //c comment 3
+    // message 2
+    // message 3
+      //a comment 1
+      //b comment 2
+      //c comment 3
+    foreach ($messages as $message){
+      $comments[] = $this->Comment->index_comments($message['id']);
+    }
+
+    $this->load->view('Users/show', array("user" => $user, "wall" => $wall, "messages" => $messages, "comments" => $comments));
   }
 
 }

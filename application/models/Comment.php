@@ -9,10 +9,11 @@ class Comment extends CI_Model{
     $this->db->query($query,$values);
     return true;
   }
-  // public function index_wall_messages($wall_id){
-  //   $query = "SELECT messages.message_content, users.first_name, users.last_name, messages.id, messages.created_at from walls left join users on walls.user_id = users.id left join messages on walls.id = messages.wall_id where walls.id = ?";
-  //   $values = array($wall_id);
-  //   return $this->db->query($query, $values)->result_array();
-  // }
+  // public function show($index_by_message){
+  public function index_comments($message_id){
+    $query = "SELECT comments.comment_content, users.first_name, users.last_name, comments.created_at from messages left join comments on messages.id = comments.user_id left join users on users.id = comments.user_id where messages.id = ?";
+    $values = array($message_id);
+    return $this->db->query($query, $values)->result_array();
+  }
 
 }

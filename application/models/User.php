@@ -28,6 +28,7 @@
       // get user from db
       $query = "SELECT * FROM users WHERE id = ?";
       $user = $this->db->query($query, $id)->row_array();
+      
       // returns that user as a row
       return $user;
 

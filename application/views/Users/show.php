@@ -8,15 +8,21 @@
   <textarea name = 'message_content'></textarea>
   <input type = 'submit' value = 'submit'>
 </form>
-<?php foreach($messages as $message)
+<?php for ($i = 0; $i < count($messages); $i ++)
 { ?>
-<p>Message form: <?= $message['first_name']." ".$message['last_name'] ?></p>
-<p><?=$message['message_content']?></p>
-<p><?=$message['comment_content']?></p>
 
+<p>Message from: <?= $messages[$i]['first_name']." ".$messages[$i]['last_name'] ?></p>
+<p><?=$messages[$i]['message_content']?></p>
+
+<?php foreach($comments[$i] as $comment)
+{ ?>
+  <p>Comment from: <?= $comment['first_name']." ".$comment['last_name'] ?></p>
+  <p><?=$comment['comment_content']?></p>
+  <?php
+}?>
 <form id = 'comments_new' action = '/comments/create' method='POST'>
   <input type = "hidden" name = 'user_id' value = <?= $user['id'] ?> >
-  <input type = "hidden" name = 'message_id' value = <?= $message['id'] ?> >
+  <input type = "hidden" name = 'message_id' value = <?= $messages[$i]['id'] ?> >
   <textarea name = 'comment_content'></textarea>
   <input type = 'submit' value = 'submit'>
 </form>
