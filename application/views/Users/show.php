@@ -5,5 +5,6 @@
 <form id = 'messages_new' action = '/messages/create' method='POST'>
   <input type = "hidden" name = 'user_id' value = <?= $user['id'] ?> >
   <input type = "hidden" name = 'wall_id' value = <?= $wall['id'] ?> >
+  <textarea name = 'message_content'></textarea>
   <input type = 'submit' value = 'submit'>
 </form>
