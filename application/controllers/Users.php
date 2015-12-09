@@ -8,6 +8,7 @@ class Users extends CI_Controller {
     parent::__construct();
     $this->load->model('User');
     $this->load->model('Wall');
+    $this->load->model('Message');
   }
 
   public function index()
@@ -60,8 +61,8 @@ class Users extends CI_Controller {
       $this->Wall->create($id);
     }
     $wall = $this->Wall->show($id);
-    $wall = $this->Wall->show($id);
-    $this->load->view('Users/show', array("user" => $user, "wall" => $wall));
+    $messages = $this->Message->index_wall_messages($wall['id']);
+    $this->load->view('Users/show', array("user" => $user, "wall" => $wall, "messages" => $messages));
   }
 
 }

@@ -8,6 +8,7 @@ class Dashboards extends CI_Controller {
     $this->load->model('User');
     $this->load->model('Wall');
     $this->load->model('Message');
+    $this->load->model('Comment');
   }
   public function index()
   {
@@ -16,9 +17,14 @@ class Dashboards extends CI_Controller {
 
   public function create_messages()
   {
-    var_dump($this->input->post());
-    die('create_messages');
-    $redirect('/users/show/1');
+    $this->Message->create($this->input->post());
+    redirect('/users/show/1');
+  }
+
+  public function create_comments()
+  {
+    $this->Comment->create($this->input->post());
+    redirect('/users/show/1');
   }
 
 }
